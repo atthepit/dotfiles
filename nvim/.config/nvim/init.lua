@@ -100,6 +100,12 @@ vim.o.hlsearch = false
 vim.wo.number = true
 vim.opt.relativenumber = true
 
+-- Show tabs as 2 spaces
+vim.opt.autoindent = true
+vim.opt.expandtab = true
+vim.opt.tabstop = 2
+vim.opt.shiftwidth = 2
+
 -- Enable mouse mode
 vim.o.mouse = 'a'
 
