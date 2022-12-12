@@ -57,6 +57,9 @@ require('packer').startup(function(use)
   -- Fuzzy Finder Algorithm which requires local dependencies to be built. Only load if `make` is available
   use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make', cond = vim.fn.executable 'make' == 1 }
 
+  -- Allow using auto formatters as prettier
+  use 'sbdchd/neoformat'
+
   -- Add custom plugins to packer from /nvim/lua/custom/plugins.lua
   local has_plugins, plugins = pcall(require, "custom.plugins")
   if has_plugins then plugins(use) end
@@ -213,11 +216,16 @@ vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { de
 vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep, { desc = '[S]earch by [G]rep' })
 vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
 
+-- [[ Configure Neoformat ]]
+-- See `:help neoformat`
+vim.g.neoformat_try_node_exe = 1
+vim.cmd('autocmd BufWritePre *.{js,jsx} Neoformat')
+
 -- [[ Configure Treesitter ]]
 -- See `:help nvim-treesitter`
 require('nvim-treesitter.configs').setup {
   -- Add languages to be installed here that you want installed for treesitter
-  ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'typescript' },
+  ensure_installed = { 'typescript', 'javascript', 'html' },
 
   highlight = { enable = true },
   indent = { enable = true },
@@ -336,7 +344,7 @@ require('mason').setup()
 
 -- Enable the following language servers
 -- Feel free to add/remove any LSPs that you want here. They will automatically be installed
-local servers = { 'clangd', 'rust_analyzer', 'pyright', 'tsserver', 'sumneko_lua', 'gopls' }
+local servers = { 'tsserver', 'eslint', 'html' }
 
 -- Ensure the servers above are installed
 require('mason-lspconfig').setup {
