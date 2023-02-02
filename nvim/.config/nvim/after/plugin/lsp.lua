@@ -64,7 +64,7 @@ lsp.on_attach(function(client, bufnr)
     vim.keymap.set("n", "[d", vim.diagnostic.goto_next, opts)
     vim.keymap.set("n", "]d", vim.diagnostic.goto_prev, opts)
 
-vim.keymap.set("n", "<leader>ff", vim.lsp.buf.format) -- Format file
+    vim.keymap.set("n", "<leader>ff", vim.lsp.buf.format) -- Format file
 end)
 
 lsp.setup()
