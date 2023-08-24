@@ -4,8 +4,7 @@ lsp.preset('recommended')
 
 lsp.ensure_installed({
     'tsserver',
-    'eslint',
-    'sumneko_lua'
+    'eslint'
 })
 
 -- Fix Undefined global 'vim'
@@ -23,7 +22,7 @@ lsp.configure('sumneko_lua', {
 
 -- This mappins only apply on completition help
 local cmp = require('cmp')
-local cmp_select = {behavior = cmp.SelectBehavior.Select}
+local cmp_select = { behavior = cmp.SelectBehavior.Select }
 local cmp_mappings = lsp.defaults.cmp_mappings({
     ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select), -- Previous element
     ['<C-n>'] = cmp.mapping.select_next_item(cmp_select), -- Next element
@@ -43,7 +42,7 @@ local builtin = require('telescope.builtin')
 
 -- This function runs every time LSP connects to a particular buffer
 lsp.on_attach(function(client, bufnr)
-    local opts = {buffer = bufnr, remap = false}
+    local opts = { buffer = bufnr, remap = false }
 
     vim.keymap.set("n", '<leader>rn', vim.lsp.buf.rename, opts) -- '[R]e[n]ame'
     vim.keymap.set("n", '<leader>ca', vim.lsp.buf.code_action, opts) -- '[C]ode [A]ction'
@@ -72,4 +71,3 @@ lsp.setup()
 vim.diagnostic.config({
     virtual_text = true,
 })
-
